@@ -134,6 +134,10 @@ function DrawerUI:create_tree(bufnr)
     prepare_node = function(node)
       local line = NuiLine()
 
+      if node.id and vim.startswith(node.id, "__separator_node__") then
+        return line
+      end
+
       line:append(string.rep("  ", node:get_depth() - 1))
 
       if node:has_children() or node.lazy_children then
